@@ -7,9 +7,12 @@ import baseConfig from './webpack.config.base.babel';
 
 export default merge(baseConfig, {
   mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
+    hot: true,
     port: 8082,
     disableHostCheck: true,
   },
-  plugins: [new WebpackNotifierPlugin()],
+
+  plugins: [new WebpackNotifierPlugin(), new webpack.HotModuleReplacementPlugin()],
 });
