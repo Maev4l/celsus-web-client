@@ -1,6 +1,9 @@
 module.exports = {
-  extends: ['airbnb-base', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier', 'prettier/react'],
   parser: 'babel-eslint',
+  env: {
+    browser: true,
+  },
   rules: {
     'react/forbid-prop-types': 'off',
     'react/require-default-props': 'off',

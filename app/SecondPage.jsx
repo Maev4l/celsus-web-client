@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const SecondPage = () => (
   <div>
-    Second Page 6<br></br>
+    Second Page 6
+    <br />
     <Link to="/">To First Page</Link>
   </div>
 );

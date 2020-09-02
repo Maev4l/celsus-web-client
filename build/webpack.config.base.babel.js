@@ -3,15 +3,13 @@ import webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { dependencies as externals } from '../package.json';
-
 /* eslint-disable */
 const infra = process.env.BUILD_MODE === 'CI' ? {} : require('../infra.json');
 /* eslint-enable */
 
 export default {
   entry: {
-    main: path.join(__dirname, '..', 'app', 'main.js'),
+    main: path.join(__dirname, '..', 'app', 'Main.jsx'),
   },
 
   module: {

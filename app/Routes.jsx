@@ -8,8 +8,8 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={FirstPage}></Route>
-        <Route exact path="/next" component={SecondPage}></Route>
+        <Route exact path="/" component={FirstPage} />
+        <Route exact path="/next" component={SecondPage} />
       </Switch>
     </BrowserRouter>
   );

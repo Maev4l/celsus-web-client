@@ -6,7 +6,9 @@
     "download-infra:dev": "aws s3 cp s3://celsus-tf-state/celsus/dev/infra.json infra.json",
     "build": "yarn download-infra:dev && webpack --config ./build/webpack.config.prod.babel.js --progress --colors",
     "build:dev": "yarn download-infra:dev && webpack --config ./build/webpack.config.dev.babel.js --progress --colors",
-    "start:dev": "yarn download-infra:dev && webpack-dev-server --config ./build/webpack.config.dev.babel.js --progress --colors"
+    "build:ci": "BUILD_MODE=CI webpack --config ./build/webpack.config.prod.babel.js --progress --colors",
+    "start:dev": "yarn download-infra:dev && webpack-dev-server --config ./build/webpack.config.dev.babel.js --progress --colors",
+    "lint": "eslint app/**/*.jsx app/**/*.js build/*.js --no-error-on-unmatched-pattern"
   },
   "devDependencies": {
     "@babel/core": "7.11.5",
@@ -31,12 +33,13 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
     "@babel/register": "7.11.5",
+    "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "3.0.0",
     "eslint": "7.8.1",
-    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-jsx-a11y": "6.3.1",
