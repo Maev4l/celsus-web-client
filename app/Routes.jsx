@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import Layout from './layout/Layout';
 import Home from './home/Home';
 import SecondPage from './SecondPage';
 import SignIn from './authentication/SignIn';
@@ -19,8 +20,12 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <AuthenticatedRoute exact path="/" component={Home} />
-        <AuthenticatedRoute exact path="/next" component={SecondPage} />
+        <AuthenticatedRoute exact path="/">
+          <Layout component={Home} />
+        </AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/next" component={SecondPage}>
+          <Layout component={SecondPage} />
+        </AuthenticatedRoute>
         <Route path="/sign-in" component={SignIn} />
       </Switch>
     </BrowserRouter>

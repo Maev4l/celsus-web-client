@@ -9,5 +9,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/label-has-for': 'off',
+    'react/prop-types': 'off',
   },
 };
