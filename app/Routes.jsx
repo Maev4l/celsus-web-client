@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import Layout from './layout/Layout';
 import Home from './home/Home';
-import SecondPage from './SecondPage';
+import Libraries from './libraries/Libraries';
 import SignIn from './authentication/SignIn';
 
 const AuthenticatedRoute = (props) => {
@@ -23,8 +23,8 @@ const Routes = () => {
         <AuthenticatedRoute exact path="/">
           <Layout component={Home} />
         </AuthenticatedRoute>
-        <AuthenticatedRoute exact path="/next" component={SecondPage}>
-          <Layout component={SecondPage} />
+        <AuthenticatedRoute exact path="/libraries">
+          <Layout component={Libraries} />
         </AuthenticatedRoute>
         <Route path="/sign-in" component={SignIn} />
       </Switch>
