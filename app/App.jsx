@@ -1,7 +1,11 @@
 import React from 'react';
 
+import { hot } from 'react-hot-loader';
+
+import Routes from './Routes';
+
 const App = () => {
-  return <div>Hello world 2!</div>;
+  return <Routes />;
 };
 
-export default App;
+export default hot(module)(App);

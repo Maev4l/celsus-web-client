@@ -7,8 +7,12 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-import Routes from './Routes';
+import App from './App';
+
 import rootReducer from './reducers';
+
+const loggerMiddleware = createLogger();
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 Amplify.configure({
   Auth: {
@@ -22,16 +26,9 @@ Amplify.configure({
   },
 });
 
-const loggerMiddleware = createLogger();
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
-
 render(
   <Provider store={store}>
-    <Routes />
+    <App />
   </Provider>,
   document.getElementById('root'),
 );
-
-if (module.hot) {
-  module.hot.accept();
-}
