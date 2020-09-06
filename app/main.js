@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './Routes';
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
+import App from './App';
 
-if (module.hot) {
-  module.hot.accept();
-}
+ReactDOM.render(<App />, document.getElementById('root'));
