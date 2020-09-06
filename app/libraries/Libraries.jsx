@@ -1,14 +1,22 @@
 import React from 'react';
+import { Switch } from 'react-router-dom';
 
-const Libraries = () => <div>Libraries</div>;
+import { AuthenticatedRoute } from '../shared/routing';
+import LibrariesListContainer from './LibrariesListContainer';
 
-/*
 export default () => (
-    <Switch>
-      <Route exact path="/libraries" render={() => <LibrariesListPanel />} />
-      <Route exact path="/libraries/new" render={matchProps => <LibraryEditor {...matchProps} />} />
-      <Route path="/libraries/:id" render={matchProps => <LibraryEditor {...matchProps} />} />
-    </Switch>
-  );
-  */
-export default Libraries;
+  <Switch>
+    <AuthenticatedRoute exact path="/libraries" component={LibrariesListContainer} />
+    {/*
+    <AuthenticatedRoute
+      exact
+      path="/libraries/new"
+      render={(matchProps) => <LibraryEditor {...matchProps} />}
+    />
+    <AuthenticatedRoute
+      path="/libraries/:id"
+      render={(matchProps) => <LibraryEditor {...matchProps} />}
+    />
+    */}
+  </Switch>
+);

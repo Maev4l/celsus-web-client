@@ -12,7 +12,7 @@ const Layout = ({ component: Component, ...rest }) => {
     <div>
       <NavSideBar path={path} />
       <Sidebar.Pusher>
-        <div css={{ 'margin-left': '150px' }}>
+        <div css={{ marginLeft: '150px' }}>
           <NavHeaderBar />
           <Component {...rest} />
         </div>

@@ -10,8 +10,13 @@ const AuthenticatedRoute = ({ withLayout, component, ...rest }) => {
   if (!authenticated) {
     return <Redirect to="/sign-in" />;
   }
+  const Component = component;
   if (!withLayout) {
-    return <Route {...rest} />;
+    return (
+      <Route {...rest}>
+        <Component />
+      </Route>
+    );
   }
 
   return (
