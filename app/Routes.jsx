@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { Layout } from './shared/layout';
 import Home from './home/Home';
 import Libraries from './libraries/Libraries';
 import SignIn from './authentication/SignIn';
@@ -11,12 +10,8 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <AuthenticatedRoute exact path="/">
-          <Layout component={Home} />
-        </AuthenticatedRoute>
-        <AuthenticatedRoute exact path="/libraries">
-          <Layout component={Libraries} />
-        </AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/" withLayout component={Home} />
+        <AuthenticatedRoute exact path="/libraries" withLayout component={Libraries} />
         <Route path="/sign-in" component={SignIn} />
       </Switch>
     </BrowserRouter>

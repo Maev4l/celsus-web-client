@@ -1,14 +1,24 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const AuthenticatedRoute = (props) => {
+import { Layout } from '../layout';
+
+const AuthenticatedRoute = ({ withLayout, component, ...rest }) => {
   const { authenticated } = useSelector((store) => ({ authenticated: store.authn.authenticated }));
   if (!authenticated) {
     return <Redirect to="/sign-in" />;
   }
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...props} />;
+  if (!withLayout) {
+    return <Route {...rest} />;
+  }
+
+  return (
+    <Route {...rest}>
+      <Layout component={component} />
+    </Route>
+  );
 };
 
 export default AuthenticatedRoute;
