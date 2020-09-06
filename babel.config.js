@@ -23,6 +23,7 @@ module.exports = (api) => {
       // @babel/preset-env will automatically target our browserslist targets
       require('@babel/preset-env'),
       [require('@babel/preset-react'), { development }],
+      require('@emotion/babel-preset-css-prop'),
     ],
     plugins: [
       require('@babel/plugin-transform-runtime'),

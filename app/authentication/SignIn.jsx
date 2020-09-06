@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { operations } from './duck';
 
+import styles from '../shared/styles';
+
+const { flex, flexContentCenter, flexCenter, flexColumn, col3 } = styles;
+
 const SignIn = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -44,8 +48,26 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-content-center flex-center flex-column login-page">
-      <Form loading={authenticating} className="col-3 login-form">
+    <div
+      css={[
+        flex,
+        flexContentCenter,
+        flexCenter,
+        flexColumn,
+        {
+          height: '100%',
+        },
+      ]}
+    >
+      <Form
+        loading={authenticating}
+        css={[
+          col3,
+          {
+            'min-width': '300px',
+          },
+        ]}
+      >
         <Segment stacked>
           <Form.Input
             fluid
