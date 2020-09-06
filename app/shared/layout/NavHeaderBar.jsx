@@ -17,8 +17,8 @@ const NavHeaderBar = () => {
     <Menu
       borderless
       css={{
-        'border-width': '0px !important',
-        'border-radius': '0px !important',
+        borderWidth: '0px !important',
+        borderRadius: '0px !important',
       }}
     >
       <Menu.Item>

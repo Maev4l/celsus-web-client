@@ -17,8 +17,8 @@ const layout = {
    * Flex
    */
   flexRow: {
-    'flex-direction': 'row',
-    'justify-content': 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 
   flex: {
@@ -26,51 +26,51 @@ const layout = {
   },
 
   flexColumn: {
-    'flex-direction': 'column',
+    flexDirection: 'column',
   },
 
   flexWrap: {
-    'flex-wrap': 'wrap',
+    flexWrap: 'wrap',
   },
 
   flexNoWrap: {
-    'flex-wrap': 'nowrap',
+    flexWrap: 'nowrap',
   },
 
   flexCenter: {
-    'align-items': 'center',
+    alignItems: 'center',
   },
   flexBaseline: {
-    'align-items': 'baseline',
+    alignItems: 'baseline',
   },
   flexStretch: {
-    'align-items': 'stretch',
+    alignItems: 'stretch',
   },
 
   flexStart: {
-    'align-items': 'flex-start',
+    alignItems: 'flex-start',
   },
 
   flexEnd: {
-    'align-items': 'flex-end',
+    alignItems: 'flex-end',
   },
 
   flexContentCenter: {
-    'justify-content': 'center',
+    justifyContent: 'center',
   },
 
   flexContentEnd: {
-    'justify-content': 'flex-end',
+    justifyContent: 'flex-end',
   },
 
   flexContentStart: {
-    'justify-content': 'flex-start',
+    justifyContent: 'flex-start',
   },
   flexContentAround: {
-    'justify-content': 'space-around',
+    justifyContent: 'space-around',
   },
   flexContentBetween: {
-    'justify-content': 'space-between',
+    justifyContent: 'space-between',
   },
 
   /**
