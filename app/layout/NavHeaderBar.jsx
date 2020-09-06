@@ -1,11 +1,16 @@
 import React from 'react';
 import { Menu, Button } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 
-// import * as action from '../../../authn/actions';
+import { operations } from '../authentication/duck';
 
-const NavHeaderBar = ({ history, signOut }) => {
+const NavHeaderBar = () => {
+  const { signOut } = operations;
+
+  const dispatch = useDispatch();
+
   const handleSignOut = () => {
-    signOut().then(() => history.push('/sign-in'));
+    dispatch(signOut());
   };
 
   return (

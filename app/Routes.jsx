@@ -1,20 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Layout from './layout/Layout';
 import Home from './home/Home';
 import Libraries from './libraries/Libraries';
 import SignIn from './authentication/SignIn';
-
-const AuthenticatedRoute = (props) => {
-  const { authenticated } = useSelector((store) => ({ authenticated: store.authn.authenticated }));
-  if (!authenticated) {
-    return <Redirect to="/sign-in" />;
-  }
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...props} />;
-};
+import { AuthenticatedRoute } from './shared/routing';
 
 const Routes = () => {
   return (
