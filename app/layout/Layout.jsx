@@ -3,6 +3,7 @@ import React from 'react';
 import { Sidebar } from 'semantic-ui-react';
 
 import NavSideBar from './NavSideBar';
+import NavHeaderBar from './NavHeaderBar';
 
 const Layout = ({ component: Component, ...rest }) => {
   const { path } = rest;
@@ -11,7 +12,10 @@ const Layout = ({ component: Component, ...rest }) => {
     <div>
       <NavSideBar path={path} />
       <Sidebar.Pusher>
-        <Component {...rest} />
+        <div css={{ 'margin-left': '150px' }}>
+          <NavHeaderBar />
+          <Component {...rest} />
+        </div>
       </Sidebar.Pusher>
     </div>
   );

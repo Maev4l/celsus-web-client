@@ -1,11 +1,7 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
 import { Menu, Button } from 'semantic-ui-react';
 
-import * as action from '../../../authn/actions';
-
-import './style.scss';
+// import * as action from '../../../authn/actions';
 
 const NavHeaderBar = ({ history, signOut }) => {
   const handleSignOut = () => {
@@ -13,7 +9,13 @@ const NavHeaderBar = ({ history, signOut }) => {
   };
 
   return (
-    <Menu borderless className="navigation-header-bar">
+    <Menu
+      borderless
+      css={{
+        'border-width': '0px !important',
+        'border-radius': '0px !important',
+      }}
+    >
       <Menu.Item>
         <div id="header-extra-menu" />
       </Menu.Item>
@@ -26,8 +28,4 @@ const NavHeaderBar = ({ history, signOut }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(action.signOut()),
-});
-
-export default connect(null, mapDispatchToProps)(NavHeaderBar);
+export default NavHeaderBar;
