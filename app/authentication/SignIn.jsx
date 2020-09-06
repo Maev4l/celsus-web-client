@@ -64,7 +64,7 @@ const SignIn = () => {
         css={[
           col3,
           {
-            'min-width': '300px',
+            minWidth: '300px',
           },
         ]}
       >

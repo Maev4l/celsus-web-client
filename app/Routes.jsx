@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Layout from './layout/Layout';
+import { Layout } from './shared/layout';
 import Home from './home/Home';
 import Libraries from './libraries/Libraries';
 import SignIn from './authentication/SignIn';

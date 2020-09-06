@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Button } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 
-import { operations } from '../authentication/duck';
+import { operations } from '../../authentication/duck';
 
 const NavHeaderBar = () => {
   const { signOut } = operations;
