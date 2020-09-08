@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import { AuthenticatedRoute } from '../shared/routing';
-import LibrariesListContainer from './LibrariesListContainer';
+import LibrariesList from './LibrariesList';
 
 export default () => (
   <Switch>
-    <AuthenticatedRoute exact path="/libraries" component={LibrariesListContainer} />
+    <AuthenticatedRoute exact path="/libraries" component={LibrariesList} />
     {/*
     <AuthenticatedRoute
       exact
