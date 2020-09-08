@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { Suspense } from 'react';
 import clsx from 'clsx';
-import { CssBaseline, Toolbar } from '@material-ui/core';
+import { CssBaseline, Toolbar, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import NavSideBar from './NavSideBar';
@@ -31,7 +31,9 @@ const Layout = ({ component: Component, ...rest }) => {
 
       <main className={clsx(content, p2)}>
         <Toolbar />
-        <Component {...rest} />
+        <Suspense fallback={<CircularProgress color="primary" />}>
+          <Component {...rest} />
+        </Suspense>
       </main>
     </div>
   );

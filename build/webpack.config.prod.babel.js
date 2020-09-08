@@ -6,6 +6,7 @@ import baseConfig from './webpack.config.base.babel';
 export default merge(baseConfig, {
   mode: 'production',
   optimization: {
+    runtimeChunk: 'single',
     minimize: true,
     minimizer: [
       new TerserPlugin({ parallel: true, sourceMap: true, cache: true, extractComments: false }),

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Home from './home/Home';
-import Libraries from './libraries/Libraries';
-import SignIn from './authentication/SignIn';
 import { AuthenticatedRoute } from './shared/routing';
+import SignIn from './authentication/SignIn';
+
+const Home = lazy(() => import('./home/Home'));
+const Libraries = lazy(() => import('./libraries/Libraries'));
 
 const Routes = () => {
   return (
