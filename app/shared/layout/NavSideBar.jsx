@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavSideBar = ({ path }) => {
-  const { drawer, drawerPaper, toolBar, drawerContainer } = useStyles();
+  const { drawer, drawerPaper, toolbar, drawerContainer } = useStyles();
   return (
     <Drawer
       className={drawer}
@@ -31,7 +31,7 @@ const NavSideBar = ({ path }) => {
         paper: drawerPaper,
       }}
     >
-      <div className={clsx(toolBar, drawerContainer)}>
+      <div className={clsx(toolbar, drawerContainer)}>
         <ListItem button selected={path === '/'} component={Link} to="/">
           <ListItemText>Home</ListItemText>
         </ListItem>
