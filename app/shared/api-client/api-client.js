@@ -1,7 +1,7 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import Auth from '@aws-amplify/auth';
 
-const graphql = async (operation) => {
+const graphql = async (operation, options) => {
   const currentSession = await Auth.currentSession();
   const {
     idToken: { jwtToken },
@@ -12,7 +12,7 @@ const graphql = async (operation) => {
     Authorization: jwtToken,
   };
 
-  const result = await API.graphql(graphqlOperation(operation), headers);
+  const result = await API.graphql(graphqlOperation(operation, options), headers);
   return result;
 };
 

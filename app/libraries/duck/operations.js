@@ -1,8 +1,15 @@
 import { graphql } from '../../shared/api-client';
 import actions from './actions';
-import { ListLibraries } from './queries';
+import { ListLibraries, DeleteLibrary } from './queries';
 
-const { fetchingLibraries, fetchLibrariesSucceeded, fetchLibrariesFailed } = actions;
+const {
+  fetchingLibraries,
+  fetchLibrariesSucceeded,
+  fetchLibrariesFailed,
+  deletingLibrary,
+  deleteLibrarySucceeded,
+  deleteLibraryError,
+} = actions;
 
 const getLibraries = () => async (dispatch) => {
   dispatch(fetchingLibraries());
@@ -14,6 +21,21 @@ const getLibraries = () => async (dispatch) => {
   }
 };
 
+const deleteLibrary = (id) => async (dispatch) => {
+  dispatch(deletingLibrary);
+  try {
+    await graphql(DeleteLibrary, { id });
+    dispatch(deleteLibrarySucceeded());
+  } catch (e) {
+    const { errors } = e;
+    if (errors) {
+      const [error] = errors;
+      dispatch(deleteLibraryError(error));
+    }
+  }
+};
+
 export default {
   getLibraries,
+  deleteLibrary,
 };

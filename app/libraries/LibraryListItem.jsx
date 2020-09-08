@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LibraryListItem = ({ library }) => {
+const LibraryListItem = ({ library, onDelete }) => {
   const { id, name, description, booksCount } = library;
   const { pt2, pr2, pl2, flexContentBetween } = useGlobalStyles();
   const { card } = useStyles();
@@ -33,7 +33,9 @@ const LibraryListItem = ({ library }) => {
     showDeletionPopup(false);
   };
 
-  const handleConfirmDelete = () => {};
+  const handleConfirmDelete = () => {
+    onDelete(id);
+  };
 
   return (
     <div>

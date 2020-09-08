@@ -8,7 +8,7 @@ import LibraryListItem from './LibraryListItem';
 import useGlobalStyles from '../shared/styles';
 
 const LibrariesList = () => {
-  const { getLibraries } = operations;
+  const { getLibraries, deleteLibrary } = operations;
   const dispatch = useDispatch();
   const { flexGrow } = useGlobalStyles();
 
@@ -27,6 +27,10 @@ const LibrariesList = () => {
     shallowEqual,
   );
 
+  const onDeleteLibrary = (id) => {
+    dispatch(deleteLibrary(id)).then(() => dispatch(getLibraries()));
+  };
+
   if (isLoading) {
     return <Loop />;
   }
@@ -38,7 +42,7 @@ const LibrariesList = () => {
           const { id } = library;
           return (
             <Grid item key={id}>
-              <LibraryListItem key={id} library={library} />
+              <LibraryListItem key={id} library={library} onDelete={onDeleteLibrary} />
             </Grid>
           );
         })}
