@@ -19,9 +19,11 @@ const AuthenticatedRoute = ({ withLayout, component, ...rest }) => {
     );
   }
 
+  const { path } = rest;
+
   return (
     <Route {...rest}>
-      <Layout component={component} />
+      <Layout component={component} path={path} />
     </Route>
   );
 };

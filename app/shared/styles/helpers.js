@@ -1,82 +1,122 @@
-const helpers = {
+const helpers = (theme) => ({
   m1: {
-    margin: '5px',
+    margin: theme.spacing(1),
   },
   ml1: {
-    'margin-left': '5px',
+    marginLeft: theme.spacing(1),
   },
 
   mr1: {
-    'margin-right': '5px',
+    marginRight: theme.spacing(1),
   },
 
   mt1: {
-    'margin-top': '5px',
+    marginTop: theme.spacing(1),
   },
 
   mb1: {
-    'margin-bottom': '5px',
+    marginBottom: theme.spacing(1),
   },
 
   m2: {
-    margin: '10px',
+    margin: theme.spacing(2),
   },
 
   ml2: {
-    'margin-left': '10px',
+    marginLeft: theme.spacing(2),
   },
 
   mr2: {
-    'margin-right': '10px',
+    marginRight: theme.spacing(2),
   },
 
   mt2: {
-    'margin-top': '10px',
+    marginTop: theme.spacing(2),
   },
 
   mb2: {
-    'margin-bottom': '10px',
+    marginBottom: theme.spacing(2),
   },
 
   m3: {
-    margin: '20px',
+    margin: theme.spacing(4),
   },
 
   mr3: {
-    'margin-right': '20px',
+    marginRight: theme.spacing(3),
   },
 
   ml3: {
-    'margin-left': '20px',
+    marginLeft: theme.spacing(3),
   },
 
   mt3: {
-    'margin-top': '20px',
+    marginTop: theme.spacing(3),
   },
 
   mb3: {
-    'margin-bottom': '20px',
+    marginBottom: theme.spacing(3),
   },
 
   p1: {
-    padding: '5px',
+    padding: theme.spacing(1),
+  },
+
+  pt1: {
+    paddingTop: theme.spacing(1),
+  },
+
+  pb1: {
+    paddingBottom: theme.spacing(1),
+  },
+
+  pl1: {
+    paddingLeft: theme.spacing(1),
+  },
+
+  pr1: {
+    paddingRight: theme.spacing(1),
   },
 
   p2: {
-    padding: '10px',
+    padding: theme.spacing(2),
+  },
+
+  pt2: {
+    paddingTop: theme.spacing(2),
+  },
+
+  pb2: {
+    paddingBottom: theme.spacing(2),
+  },
+
+  pl2: {
+    paddingLeft: theme.spacing(2),
+  },
+
+  pr2: {
+    paddingRight: theme.spacing(2),
   },
 
   p3: {
-    padding: '20px',
+    padding: theme.spacing(3),
+  },
+
+  pt3: {
+    paddingTop: theme.spacing(3),
+  },
+
+  pb3: {
+    paddingBottom: theme.spacing(3),
   },
 
   pr3: {
-    'padding-right': '20px',
+    paddingRight: theme.spacing(3),
   },
 
   pl3: {
-    'padding-left': '20px',
+    paddingLeft: theme.spacing(3),
   },
-};
+});
 
 export default helpers;

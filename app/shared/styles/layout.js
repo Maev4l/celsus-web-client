@@ -1,4 +1,4 @@
-const layout = {
+const layout = () => ({
   container: {
     height: '100%',
   },
@@ -123,6 +123,6 @@ const layout = {
   col12: {
     width: '100% !important',
   },
-};
+});
 
 export default layout;
