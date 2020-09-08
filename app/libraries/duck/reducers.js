@@ -12,7 +12,7 @@ const libraries = (state = INITIAL_STATE, action) => {
   const { type } = action;
   switch (type) {
     case GET_LIBRARIES:
-      return { isLoading: true, ...state };
+      return { ...state, isLoading: true };
     case GET_LIBRARIES_SUCCESS: {
       const { result } = action;
       return {
