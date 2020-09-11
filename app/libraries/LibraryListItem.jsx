@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, CardContent, CardActions, IconButton, Chip } from '@material-ui/core';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  IconButton,
+  Chip,
+  CardActionArea,
+} from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
 
 import { SimpleModal } from '../shared/ui';
@@ -23,6 +32,8 @@ const LibraryListItem = ({ library, onDelete }) => {
 
   const [showDeletionConfirmation, showDeletionPopup] = useState(false);
 
+  const history = useHistory();
+
   const handleClickBook = () => {};
 
   const handleClickDelete = () => {
@@ -37,11 +48,17 @@ const LibraryListItem = ({ library, onDelete }) => {
     onDelete(id);
   };
 
+  const handleCardClick = () => {
+    history.push(`/libraries/${id}`);
+  };
+
   return (
     <div>
       <Card className={clsx(pt2, pr2, pl2, card)} variant="outlined">
-        <CardHeader title={name} />
-        <CardContent>{description}</CardContent>
+        <CardActionArea onClick={handleCardClick}>
+          <CardHeader title={name} />
+          <CardContent>{description}</CardContent>
+        </CardActionArea>
         <CardActions disableSpacing className={flexContentBetween}>
           <Chip label={`Books: ${booksCount}`} color="primary" onClick={handleClickBook} />
           {booksCount === 0 && (

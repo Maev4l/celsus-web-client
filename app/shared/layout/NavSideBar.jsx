@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { Drawer, ListItem, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { sideBarWidth } from './utils';
 
@@ -21,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavSideBar = ({ path }) => {
+const NavSideBar = () => {
   const { drawer, drawerPaper, toolbar, drawerContainer } = useStyles();
+  const { pathname } = useLocation();
+
   return (
     <Drawer
       className={drawer}
@@ -32,13 +34,23 @@ const NavSideBar = ({ path }) => {
       }}
     >
       <div className={clsx(toolbar, drawerContainer)}>
-        <ListItem button selected={path === '/'} component={Link} to="/">
+        <ListItem button selected={pathname === '/'} component={Link} to="/">
           <ListItemText>Home</ListItemText>
         </ListItem>
-        <ListItem button selected={path === '/libraries'} component={Link} to="/libraries">
+        <ListItem
+          button
+          selected={pathname.startsWith('/libraries')}
+          component={Link}
+          to="/libraries"
+        >
           <ListItemText>Libraries</ListItemText>
         </ListItem>
-        <ListItem button selected={path === '/contacts'} component={Link} to="/contacts">
+        <ListItem
+          button
+          selected={pathname.startsWith('/contacts')}
+          component={Link}
+          to="/contacts"
+        >
           <ListItemText>Contacts</ListItemText>
         </ListItem>
       </div>

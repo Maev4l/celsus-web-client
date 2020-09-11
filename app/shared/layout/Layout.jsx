@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Suspense } from 'react';
 import clsx from 'clsx';
 import { CssBaseline, CircularProgress } from '@material-ui/core';
@@ -16,9 +15,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-const Layout = ({ component: Component, ...rest }) => {
-  const { path } = rest;
-
+const Layout = ({ children }) => {
   const { flex, p2 } = useGlobalStyles();
   const { content, toolbar } = useStyles();
 
@@ -27,14 +24,12 @@ const Layout = ({ component: Component, ...rest }) => {
       <CssBaseline />
       <NavHeaderBar />
 
-      <NavSideBar path={path} />
+      <NavSideBar />
 
       <main className={clsx(content, p2)}>
         <div className={toolbar} />
         <Suspense fallback={<CircularProgress color="primary" />}>
-          <div>
-            <Component {...rest} />
-          </div>
+          <div>{children}</div>
         </Suspense>
       </main>
     </div>
