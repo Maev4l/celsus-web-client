@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Loop } from '@material-ui/icons';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import { operations } from './duck';
 import LibraryListItem from './LibraryListItem';
 import useGlobalStyles from '../shared/styles';
+import { addHeaderActions } from '../shared/layout';
 
 const LibrariesList = () => {
   const { getLibraries, deleteLibrary } = operations;
   const dispatch = useDispatch();
   const { flexGrow } = useGlobalStyles();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +30,18 @@ const LibrariesList = () => {
     shallowEqual,
   );
 
+  const handleAddLibrary = () => {
+    history.push('/libraries/new');
+  };
+
+  const ExtraActions = () => {
+    return (
+      <Button onClick={handleAddLibrary} color="primary" variant="outlined">
+        Add Library
+      </Button>
+    );
+  };
+
   const onDeleteLibrary = (id) => {
     dispatch(deleteLibrary(id)).then(() => dispatch(getLibraries()));
   };
@@ -37,6 +52,7 @@ const LibrariesList = () => {
 
   return (
     <div className={flexGrow}>
+      {addHeaderActions(ExtraActions())}
       <Grid container spacing={3}>
         {libraries.map((library) => {
           const { id } = library;

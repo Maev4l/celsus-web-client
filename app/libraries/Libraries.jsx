@@ -12,6 +12,9 @@ export default () => (
     <AuthenticatedRoute exact path="/libraries">
       <LibrariesList />
     </AuthenticatedRoute>
+    <AuthenticatedRoute exact path="/libraries/new">
+      <LibraryEditor />
+    </AuthenticatedRoute>
     <AuthenticatedRoute path="/libraries/:id">
       <LibraryEditor />
     </AuthenticatedRoute>

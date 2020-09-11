@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { AppBar, Toolbar, Box, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { operations } from '../../authentication/duck';
 import { sideBarWidth } from './utils';
 import useGlobalStyles from '../styles';
+import { HEADER_ACTIONS_GROUP_ID } from './HeaderActions';
 
 const useStyles = makeStyles({
   appBar: {
@@ -36,9 +37,7 @@ const NavHeaderBar = () => {
       <Toolbar>
         <Box className={clsx(flex, flexContentBetween, container)}>
           <Box>
-            <Typography variant="h6" noWrap>
-              Celsus
-            </Typography>
+            <div id={HEADER_ACTIONS_GROUP_ID} />
           </Box>
           <Box>
             <Button

@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/no-children-prop */
 import React, { lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
