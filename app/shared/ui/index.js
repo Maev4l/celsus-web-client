@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as SimpleModal } from './SimpleModal';
+export { default as useToasts } from './toasts';

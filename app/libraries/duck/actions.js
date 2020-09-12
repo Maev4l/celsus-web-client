@@ -7,6 +7,9 @@ const {
   DELETE_LIBRARY,
   DELETE_LIBRARY_SUCCESS,
   DELETE_LIBRARY_ERROR,
+  ADD_LIBRARY,
+  ADD_LIBRARY_SUCCESS,
+  ADD_LIBRARY_ERROR,
 } = types;
 
 const fetchingLibraries = () => ({ type: GET_LIBRARIES });
@@ -15,7 +18,11 @@ const fetchLibrariesFailed = (error) => ({ type: GET_LIBRARIES_ERROR, error });
 
 const deletingLibrary = () => ({ type: DELETE_LIBRARY });
 const deleteLibrarySucceeded = () => ({ type: DELETE_LIBRARY_SUCCESS });
-const deleteLibraryError = (error) => ({ type: DELETE_LIBRARY_ERROR, error });
+const deleteLibraryFailed = (error) => ({ type: DELETE_LIBRARY_ERROR, error });
+
+const addingLibrary = (library) => ({ type: ADD_LIBRARY, library });
+const addLibrarySucceeded = () => ({ type: ADD_LIBRARY_SUCCESS });
+const addLibraryFailed = (error) => ({ type: ADD_LIBRARY_ERROR, error });
 
 export default {
   fetchingLibraries,
@@ -24,5 +31,9 @@ export default {
 
   deletingLibrary,
   deleteLibrarySucceeded,
-  deleteLibraryError,
+  deleteLibraryFailed,
+
+  addingLibrary,
+  addLibrarySucceeded,
+  addLibraryFailed,
 };

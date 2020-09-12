@@ -7,3 +7,9 @@ export const ListLibraries = `query ListLibraries {
 export const DeleteLibrary = `mutation DeleteLibrary($id: ID!) {
     removeLibrary(id: $id)
 }`;
+
+export const AddLibrary = `mutation AddLibrary($library: LibraryInput!) {
+    addLibrary(library:$library) {
+        id
+    }
+}`;

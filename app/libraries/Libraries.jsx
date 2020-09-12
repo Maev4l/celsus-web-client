@@ -5,7 +5,8 @@ import { Switch } from 'react-router-dom';
 
 import { AuthenticatedRoute } from '../shared/routing';
 import LibrariesList from './LibrariesList';
-import LibraryEditor from './LibraryEditor';
+import NewLibrary from './NewLibrary';
+import UpdateLibrary from './UpdateLibrary';
 
 export default () => (
   <Switch>
@@ -13,10 +14,10 @@ export default () => (
       <LibrariesList />
     </AuthenticatedRoute>
     <AuthenticatedRoute exact path="/libraries/new">
-      <LibraryEditor />
+      <NewLibrary />
     </AuthenticatedRoute>
     <AuthenticatedRoute path="/libraries/:id">
-      <LibraryEditor />
+      <UpdateLibrary />
     </AuthenticatedRoute>
   </Switch>
 );

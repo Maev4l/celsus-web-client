@@ -12,7 +12,17 @@ const graphql = async (operation, options) => {
     Authorization: jwtToken,
   };
 
-  const result = await API.graphql(graphqlOperation(operation, options), headers);
+  let result;
+  try {
+    result = await API.graphql(graphqlOperation(operation, options), headers);
+  } catch (e) {
+    const { errors } = e;
+    if (errors) {
+      const [error] = errors;
+      const { message } = error;
+      throw new Error(message);
+    }
+  }
   return result;
 };
 
