@@ -1,34 +1,30 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Loop } from '@material-ui/icons';
 import { Grid, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-import { operations } from './duck';
+import { graphql } from '../shared/api-client';
+import { ListLibraries, DeleteLibrary } from './duck/queries';
+
 import LibraryListItem from './LibraryListItem';
 import useGlobalStyles from '../shared/styles';
 import { addHeaderActions } from '../shared/layout';
 
 const LibrariesList = () => {
-  const { getLibraries, deleteLibrary } = operations;
-  const dispatch = useDispatch();
   const { flexGrow } = useGlobalStyles();
   const history = useHistory();
+  const [state, setState] = useState({ loading: false, libraries: [] });
+
+  const fetchData = async () => {
+    setState({ ...state, loading: true });
+    graphql(ListLibraries).then(({ libraries }) => {
+      setState({ ...state, libraries, loading: false });
+    });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getLibraries());
-    };
     fetchData();
   }, []);
-
-  const { isLoading, libraries } = useSelector(
-    (store) => ({
-      isLoading: store.libraries.isLoading,
-      libraries: store.libraries.libraries,
-    }),
-    shallowEqual,
-  );
 
   const handleAddLibrary = () => {
     history.push('/libraries/new');
@@ -43,10 +39,14 @@ const LibrariesList = () => {
   };
 
   const onDeleteLibrary = (id) => {
-    dispatch(deleteLibrary(id)).then(() => dispatch(getLibraries()));
+    graphql(DeleteLibrary, { id }).then(() => {
+      fetchData();
+    });
   };
 
-  if (isLoading) {
+  const { loading, libraries } = state;
+
+  if (loading) {
     return <Loop />;
   }
 

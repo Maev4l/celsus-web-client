@@ -14,7 +14,8 @@ const graphql = async (operation, options) => {
 
   let result;
   try {
-    result = await API.graphql(graphqlOperation(operation, options), headers);
+    const { data } = await API.graphql(graphqlOperation(operation, options), headers);
+    result = data;
   } catch (e) {
     const { errors } = e;
     if (errors) {
