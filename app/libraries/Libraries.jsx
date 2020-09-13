@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/no-children-prop */
 import React from 'react';
 import { Switch } from 'react-router-dom';
 

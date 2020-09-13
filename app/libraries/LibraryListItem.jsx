@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -31,7 +32,11 @@ const LibraryListItem = ({ library, onDelete, onClick }) => {
 
   const [showDeletionConfirmation, showDeletionPopup] = useState(false);
 
-  const handleClickBook = () => {};
+  const history = useHistory();
+
+  const handleClickBook = () => {
+    history.push(`/libraries/${id}/books`);
+  };
 
   const handleClickDelete = () => {
     showDeletionPopup(!showDeletionConfirmation);
@@ -55,7 +60,7 @@ const LibraryListItem = ({ library, onDelete, onClick }) => {
         <CardActions disableSpacing className={flexContentBetween}>
           <Chip label={`Books: ${booksCount}`} color="primary" onClick={handleClickBook} />
           {booksCount === 0 && (
-            <IconButton onClick={() => handleClickDelete()}>
+            <IconButton onClick={handleClickDelete}>
               <DeleteForever />
             </IconButton>
           )}
