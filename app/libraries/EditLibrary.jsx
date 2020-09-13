@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import LibraryEditor from './LibraryEditor';
 import { graphql } from '../shared/api-client';
-import { FetchLibrary, UpdateLibrary } from './duck/queries';
+import { FetchLibrary, UpdateLibrary } from './queries';
 
 const EditLibrary = () => {
   const { id } = useParams();

@@ -4,7 +4,7 @@ import { Grid, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import { graphql } from '../shared/api-client';
-import { ListLibraries, DeleteLibrary } from './duck/queries';
+import { ListLibraries, DeleteLibrary } from './queries';
 
 import LibraryListItem from './LibraryListItem';
 import useGlobalStyles from '../shared/styles';

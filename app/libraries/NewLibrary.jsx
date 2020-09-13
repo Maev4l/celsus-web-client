@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { graphql } from '../shared/api-client';
-import { AddLibrary } from './duck/queries';
+import { AddLibrary } from './queries';
 import LibraryEditor from './LibraryEditor';
 
 const NewLibrary = () => {
