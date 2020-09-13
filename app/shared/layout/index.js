@@ -1,2 +1,2 @@
 export { default as Layout } from './Layout';
-export * from './HeaderActions';
+export { default as NavHeaderActions } from './NavHeaderActions';

@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
 import clsx from 'clsx';
-import { CssBaseline, CircularProgress } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import NavSideBar from './NavSideBar';
 import NavHeaderBar from './NavHeaderBar';
 import useGlobalStyles from '../styles';
+import { Loading } from '../ui';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -28,7 +29,7 @@ const Layout = ({ children }) => {
 
       <main className={clsx(content, p2)}>
         <div className={toolbar} />
-        <Suspense fallback={<CircularProgress color="primary" />}>
+        <Suspense fallback={<Loading loading />}>
           <div>{children}</div>
         </Suspense>
       </main>

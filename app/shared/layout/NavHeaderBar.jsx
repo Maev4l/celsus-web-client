@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { operations } from '../../authentication/duck';
 import { sideBarWidth } from './utils';
 import useGlobalStyles from '../styles';
-import { HEADER_ACTIONS_GROUP_ID } from './HeaderActions';
+import { HEADER_ACTIONS_GROUP_ID } from './NavHeaderActions';
 
 const useStyles = makeStyles({
   appBar: {

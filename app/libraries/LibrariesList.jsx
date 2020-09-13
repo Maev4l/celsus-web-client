@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Loop } from '@material-ui/icons';
 import { Grid, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
@@ -8,7 +7,8 @@ import { ListLibraries, DeleteLibrary } from './queries';
 
 import LibraryListItem from './LibraryListItem';
 import useGlobalStyles from '../shared/styles';
-import { addHeaderActions } from '../shared/layout';
+import { NavHeaderActions } from '../shared/layout';
+import { Loading } from '../shared/ui';
 
 const LibrariesList = () => {
   const { flexGrow } = useGlobalStyles();
@@ -34,14 +34,6 @@ const LibrariesList = () => {
     history.push(`/libraries/${id}`);
   };
 
-  const ExtraActions = () => {
-    return (
-      <Button onClick={handleAddLibrary} color="primary" variant="outlined">
-        Add Library
-      </Button>
-    );
-  };
-
   const handleDeleteLibrary = (id) => {
     graphql(DeleteLibrary, { id }).then(() => {
       fetchData();
@@ -50,13 +42,14 @@ const LibrariesList = () => {
 
   const { loading, libraries } = state;
 
-  if (loading) {
-    return <Loop />;
-  }
-
   return (
     <div className={flexGrow}>
-      {addHeaderActions(ExtraActions())}
+      <Loading loading={loading} />
+      <NavHeaderActions>
+        <Button onClick={handleAddLibrary} color="primary" variant="outlined">
+          Add Library
+        </Button>
+      </NavHeaderActions>
       <Grid container spacing={3}>
         {libraries.map((library) => {
           const { id } = library;
