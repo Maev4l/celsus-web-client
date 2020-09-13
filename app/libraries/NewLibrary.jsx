@@ -1,33 +1,17 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 
 import { graphql } from '../shared/api-client';
 import { AddLibrary } from './duck/queries';
 import LibraryEditor from './LibraryEditor';
 
 const NewLibrary = () => {
-  const [state, setState] = useState({ loading: false });
-  const history = useHistory();
+  const fetchData = async () => ({ library: { name: '', description: '' } });
 
-  const library = {
-    name: '',
-    description: '',
+  const saveLibrary = async (data) => {
+    graphql(AddLibrary, { library: data });
   };
 
-  const handleSave = (data) => {
-    setState({ ...state, loading: true });
-    graphql(AddLibrary, { library: data })
-      .then(() => {
-        history.push('/libraries');
-      })
-      .catch((e) => {
-        setState({ ...state, loading: false });
-        // TODO: Display error
-      });
-  };
-
-  const { loading } = state;
-  return <LibraryEditor library={library} loading={loading} onSave={handleSave} />;
+  return <LibraryEditor saveLibrary={saveLibrary} fetchData={fetchData} />;
 };
 
 export default NewLibrary;

@@ -13,3 +13,15 @@ export const AddLibrary = `mutation AddLibrary($library: LibraryInput!) {
         id
     }
 }`;
+
+export const FetchLibrary = `query FetchLibrary($id:ID!) {
+    library(id:$id) {
+        id,
+        name, 
+        description,
+    }
+}`;
+
+export const UpdateLibrary = `mutation UpdateLibrary($library: LibraryInput!) {
+    updateLibrary(library: $library)
+}`;

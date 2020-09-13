@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Card,
@@ -25,14 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LibraryListItem = ({ library, onDelete }) => {
+const LibraryListItem = ({ library, onDelete, onClick }) => {
   const { id, name, description, booksCount } = library;
   const { pt2, pr2, pl2, flexContentBetween } = useGlobalStyles();
   const { card } = useStyles();
 
   const [showDeletionConfirmation, showDeletionPopup] = useState(false);
-
-  const history = useHistory();
 
   const handleClickBook = () => {};
 
@@ -48,14 +45,10 @@ const LibraryListItem = ({ library, onDelete }) => {
     onDelete(id);
   };
 
-  const handleCardClick = () => {
-    history.push(`/libraries/${id}`);
-  };
-
   return (
     <div>
       <Card className={clsx(pt2, pr2, pl2, card)} variant="outlined">
-        <CardActionArea onClick={handleCardClick}>
+        <CardActionArea onClick={onClick}>
           <CardHeader title={name} />
           <CardContent>{description}</CardContent>
         </CardActionArea>
