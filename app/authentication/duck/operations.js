@@ -11,7 +11,6 @@ const {
   disconnectionFailed,
 } = actions;
 
-// eslint-disable-next-line import/prefer-default-export
 const signIn = (username, password) => async (dispatch) => {
   dispatch(authenticating());
   try {

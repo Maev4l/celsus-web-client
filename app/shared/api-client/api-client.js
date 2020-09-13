@@ -12,10 +12,9 @@ const graphql = async (operation, options) => {
     Authorization: jwtToken,
   };
 
-  let result;
   try {
     const { data } = await API.graphql(graphqlOperation(operation, options), headers);
-    result = data;
+    return data;
   } catch (e) {
     const { errors } = e;
     if (errors) {
@@ -23,8 +22,8 @@ const graphql = async (operation, options) => {
       const { message } = error;
       throw new Error(message);
     }
+    throw e;
   }
-  return result;
 };
 
 export default graphql;

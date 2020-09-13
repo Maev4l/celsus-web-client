@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 import { Loading } from '../shared/ui';
 import useGlobalStyles from '../shared/styles';
+import { useNotification } from '../shared/notifications';
 
-const LibraryEditor = ({ saveLibrary, fetchData }) => {
+const LibraryEditor = ({ saveLibrary, fetchData, onSaveSuccess }) => {
   const [state, setState] = useState({ loading: false, library: { name: '', description: '' } });
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const LibraryEditor = ({ saveLibrary, fetchData }) => {
   }, []);
 
   const history = useHistory();
-
+  const { notify } = useNotification();
   const { flex, flexColumn, flexContentEnd, mt2 } = useGlobalStyles();
 
   const handleChange = (prop) => (e) => {
@@ -29,15 +30,18 @@ const LibraryEditor = ({ saveLibrary, fetchData }) => {
     setState({ ...state, library: changedLibrary });
   };
 
-  const handleSave = (data) => {
+  const handleSave = async (data) => {
     setState({ ...state, loading: true });
-    saveLibrary(data)
-      .then(() => {
-        history.push('/libraries');
-      })
-      .catch((e) => {
-        // TODO: Display Error message
-      });
+    try {
+      await saveLibrary(data);
+      if (onSaveSuccess) {
+        onSaveSuccess(data);
+      }
+      history.push('/libraries');
+    } catch (e) {
+      setState({ ...state, loading: false });
+      notify('error', e.message);
+    }
   };
 
   const { library, loading } = state;
