@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { GridListTile, GridListTileBar, Typography, IconButton } from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { SimpleModal } from '../shared/ui';
 import useGlobalStyles from '../shared/styles';
 import { BookThumbnailPlaceHolder } from '../shared/assets';
 
@@ -21,32 +22,52 @@ const useStyles = makeStyles({
   },
 });
 
-const handleClickDelete = () => {};
-
-const BookListItem = ({ book }) => {
-  const { title, thumbnail } = book;
+const BookListItem = ({ book, onDelete }) => {
+  const { id, title, thumbnail } = book;
   const { m1 } = useGlobalStyles();
   const { image, icon, titleBar } = useStyles();
+  const [showDeletionConfirmation, showDeletionPopup] = useState(false);
+
+  const handleClickDelete = () => {
+    showDeletionPopup(!showDeletionConfirmation);
+  };
+
+  const handleCancelDelete = () => {
+    showDeletionPopup(false);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(id);
+  };
 
   const source = thumbnail ? `data:image/png;base64,${thumbnail}` : BookThumbnailPlaceHolder;
 
   return (
-    <GridListTile className={clsx(m1)}>
-      <img className={clsx(image)} src={source} alt="" />
-      <GridListTileBar
-        className={clsx(titleBar)}
-        title={
-          <Typography noWrap variant="subtitle2">
-            {title}
-          </Typography>
-        }
-        actionIcon={
-          <IconButton className={icon} onClick={handleClickDelete}>
-            <DeleteForever />
-          </IconButton>
-        }
+    <>
+      <GridListTile className={clsx(m1)}>
+        <img className={clsx(image)} src={source} alt="" />
+        <GridListTileBar
+          className={clsx(titleBar)}
+          title={
+            <Typography noWrap variant="subtitle2">
+              {title}
+            </Typography>
+          }
+          actionIcon={
+            <IconButton className={icon} onClick={handleClickDelete}>
+              <DeleteForever />
+            </IconButton>
+          }
+        />
+      </GridListTile>
+      <SimpleModal
+        open={showDeletionConfirmation}
+        header="Deletion Confirmation"
+        message={`Delete '${title}' ?`}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
       />
-    </GridListTile>
+    </>
   );
 };
 

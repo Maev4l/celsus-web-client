@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const FetchLibraryBooks = `query FetchLibraryBooks ($id: ID!, $page:Int!) {
     library(id:$id, page:$page) {
         content {
@@ -11,4 +10,8 @@ export const FetchLibraryBooks = `query FetchLibraryBooks ($id: ID!, $page:Int!)
             itemsPerPage
         }
     }
+}`;
+
+export const DeleteBook = `mutation DeleteBook($id: ID!) {
+    removeBook(id: $id)
 }`;

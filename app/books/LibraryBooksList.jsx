@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Button } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import { GridList, Button, Typography } from '@material-ui/core';
+import { useParams, useLocation } from 'react-router-dom';
 
 import { NavHeaderActions } from '../shared/layout';
 import { Loading } from '../shared/ui';
-import { FetchLibraryBooks } from './queries';
+import { FetchLibraryBooks, DeleteBook } from './queries';
 import useGlobalStyles from '../shared/styles';
 import { graphql } from '../shared/api-client';
 import BookListItem from './BookListItem';
@@ -36,6 +36,9 @@ const LibraryBooksList = () => {
     itemsPerPage: 0,
     page: 0,
   });
+  const {
+    state: { libraryName },
+  } = useLocation();
 
   const handleAddBook = () => {};
 
@@ -56,22 +59,37 @@ const LibraryBooksList = () => {
     fetchData(1);
   }, []);
 
-  const { books, loading } = state;
+  const { books, loading, page } = state;
+
+  const handleDeleteLibrary = (id) => {
+    graphql(DeleteBook, { id }).then(() => {
+      fetchData(page);
+    });
+  };
+
   return (
-    <div className={clsx(flex, flexWrap, flexContentAround, container)}>
-      <Loading loading={loading} />
-      <NavHeaderActions>
-        <Button onClick={handleAddBook} color="primary" variant="outlined">
-          Add Book
-        </Button>
-      </NavHeaderActions>
-      <GridList cellHeight="auto" className={gridList}>
-        {books.map((book) => {
-          const { id } = book;
-          return <BookListItem key={id} book={book} />;
-        })}
-      </GridList>
-    </div>
+    <>
+      <div>
+        <Typography>
+          Books in library <strong>{libraryName}</strong>
+        </Typography>
+      </div>
+      <div className={clsx(flex, flexWrap, flexContentAround, container)}>
+        <Loading loading={loading} />
+        <NavHeaderActions>
+          <Button onClick={handleAddBook} color="primary" variant="outlined">
+            Add Book
+          </Button>
+        </NavHeaderActions>
+
+        <GridList cellHeight="auto" className={gridList}>
+          {books.map((book) => {
+            const { id } = book;
+            return <BookListItem key={id} book={book} onDelete={handleDeleteLibrary} />;
+          })}
+        </GridList>
+      </div>
+    </>
   );
 };
 
