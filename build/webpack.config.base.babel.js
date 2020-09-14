@@ -43,7 +43,7 @@ export default {
       },
       {
         test: /\.png$/,
-        loader: 'url-loader?limit=100000&mimetype=image/png',
+        loader: 'file-loader',
       },
       {
         test: /\.jpg$/,
