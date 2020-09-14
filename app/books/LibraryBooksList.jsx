@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { GridList, Button, Typography } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 import { useParams, useLocation } from 'react-router-dom';
 
 import { NavHeaderActions } from '../shared/layout';
@@ -11,10 +12,9 @@ import useGlobalStyles from '../shared/styles';
 import { graphql } from '../shared/api-client';
 import BookListItem from './BookListItem';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   container: {
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     width: '100%',
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
-}));
+});
 
 const LibraryBooksList = () => {
   const { id: libraryId } = useParams();
-  const { flex, flexWrap, flexContentAround } = useGlobalStyles();
+  const { flex, flexWrap, flexContentAround, mb1, mt1 } = useGlobalStyles();
   const { container, gridList } = useStyles();
   const [state, setState] = useState({
     loading: false,
@@ -50,7 +50,7 @@ const LibraryBooksList = () => {
           content: { books, total, itemsPerPage },
         },
       }) => {
-        setState({ ...state, books, total, itemsPerPage, loading: false, page: page + 1 });
+        setState({ ...state, books, total, itemsPerPage, loading: false, page });
       },
     );
   };
@@ -59,7 +59,7 @@ const LibraryBooksList = () => {
     fetchData(1);
   }, []);
 
-  const { books, loading, page } = state;
+  const { books, loading, page, total, itemsPerPage } = state;
 
   const handleDeleteLibrary = (id) => {
     graphql(DeleteBook, { id }).then(() => {
@@ -67,8 +67,17 @@ const LibraryBooksList = () => {
     });
   };
 
+  const handlePageChange = async (event, selectedPage) => {
+    await fetchData(selectedPage);
+  };
+
   return (
     <>
+      <NavHeaderActions>
+        <Button onClick={handleAddBook} color="primary" variant="outlined">
+          Add Book
+        </Button>
+      </NavHeaderActions>
       <div>
         <Typography>
           Books in library <strong>{libraryName}</strong>
@@ -76,11 +85,17 @@ const LibraryBooksList = () => {
       </div>
       <div className={clsx(flex, flexWrap, flexContentAround, container)}>
         <Loading loading={loading} />
-        <NavHeaderActions>
-          <Button onClick={handleAddBook} color="primary" variant="outlined">
-            Add Book
-          </Button>
-        </NavHeaderActions>
+        <Pagination
+          showFirstButton
+          showLastButton
+          page={page}
+          size="large"
+          count={Math.ceil(total / itemsPerPage)}
+          onChange={handlePageChange}
+          color="primary"
+          className={clsx(mt1, mb1)}
+          variant="outlined"
+        />
 
         <GridList cellHeight="auto" className={gridList}>
           {books.map((book) => {
@@ -88,6 +103,17 @@ const LibraryBooksList = () => {
             return <BookListItem key={id} book={book} onDelete={handleDeleteLibrary} />;
           })}
         </GridList>
+        <Pagination
+          showFirstButton
+          showLastButton
+          page={page}
+          size="large"
+          count={Math.ceil(total / itemsPerPage)}
+          onChange={handlePageChange}
+          color="primary"
+          className={clsx(mt1, mb1)}
+          variant="outlined"
+        />
       </div>
     </>
   );
