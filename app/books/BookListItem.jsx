@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { GridListTile, GridListTileBar, Typography, IconButton } from '@material-ui/core';
+import {
+  GridListTile,
+  GridListTileBar,
+  Typography,
+  IconButton,
+  CardMedia,
+} from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -47,7 +53,7 @@ const BookListItem = ({ libraryId, book, onDelete }) => {
     <>
       <GridListTile className={clsx(m1)}>
         <Link to={`/libraries/${libraryId}/books/${id}`}>
-          <img className={clsx(image)} src={source} alt="" />
+          <CardMedia className={clsx(image)} image={source} />
         </Link>
         <GridListTileBar
           className={clsx(titleBar)}
