@@ -6,7 +6,7 @@ import LibrariesList from './LibrariesList';
 import NewLibrary from './NewLibrary';
 import EditLibrary from './EditLibrary';
 
-import LibraryBooksList from '../books/LibraryBooksList';
+import Books from '../books/Books';
 
 export default () => (
   <Switch>
@@ -16,11 +16,11 @@ export default () => (
     <AuthenticatedRoute exact path="/libraries/new">
       <NewLibrary />
     </AuthenticatedRoute>
-    <AuthenticatedRoute exact path="/libraries/:id">
+    <AuthenticatedRoute exact path="/libraries/:libraryId">
       <EditLibrary />
     </AuthenticatedRoute>
-    <AuthenticatedRoute exact path="/libraries/:id/books">
-      <LibraryBooksList />
+    <AuthenticatedRoute path="/libraries/:libraryId/books">
+      <Books />
     </AuthenticatedRoute>
   </Switch>
 );

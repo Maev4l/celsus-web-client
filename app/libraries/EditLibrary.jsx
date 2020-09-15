@@ -7,11 +7,11 @@ import { FetchLibrary, UpdateLibrary } from './queries';
 import { useNotification } from '../shared/notifications';
 
 const EditLibrary = () => {
-  const { id } = useParams();
+  const { libraryId } = useParams();
   const { notify } = useNotification();
 
   const fetchData = async () => {
-    const data = await graphql(FetchLibrary, { id });
+    const data = await graphql(FetchLibrary, { id: libraryId });
     return data;
   };
 

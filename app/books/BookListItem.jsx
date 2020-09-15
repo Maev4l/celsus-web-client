@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { GridListTile, GridListTileBar, Typography, IconButton } from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import { SimpleModal } from '../shared/ui';
 import useGlobalStyles from '../shared/styles';
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BookListItem = ({ book, onDelete }) => {
+const BookListItem = ({ libraryId, book, onDelete }) => {
   const { id, title, thumbnail } = book;
   const { m1 } = useGlobalStyles();
   const { image, icon, titleBar } = useStyles();
@@ -45,7 +46,9 @@ const BookListItem = ({ book, onDelete }) => {
   return (
     <>
       <GridListTile className={clsx(m1)}>
-        <img className={clsx(image)} src={source} alt="" />
+        <Link to={`/libraries/${libraryId}/books/${id}`}>
+          <img className={clsx(image)} src={source} alt="" />
+        </Link>
         <GridListTileBar
           className={clsx(titleBar)}
           title={

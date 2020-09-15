@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { GridList, Button, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 
 import { NavHeaderActions } from '../shared/layout';
 import { Loading } from '../shared/ui';
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 const LibraryBooksList = () => {
-  const { id: libraryId } = useParams();
+  const { libraryId } = useParams();
   const { flex, flexWrap, flexContentAround, mb1, mt1 } = useGlobalStyles();
   const { container, gridList } = useStyles();
   const [state, setState] = useState({
@@ -40,7 +40,11 @@ const LibraryBooksList = () => {
     state: { libraryName },
   } = useLocation();
 
-  const handleAddBook = () => {};
+  const history = useHistory();
+
+  const handleAddBook = () => {
+    history.push(`/libraries/${libraryId}/books/new`);
+  };
 
   const fetchData = async (page) => {
     setState({ ...state, loading: true });
@@ -85,35 +89,46 @@ const LibraryBooksList = () => {
       </div>
       <div className={clsx(flex, flexWrap, flexContentAround, container)}>
         <Loading loading={loading} />
-        <Pagination
-          showFirstButton
-          showLastButton
-          page={page}
-          size="large"
-          count={Math.ceil(total / itemsPerPage)}
-          onChange={handlePageChange}
-          color="primary"
-          className={clsx(mt1, mb1)}
-          variant="outlined"
-        />
+        {books.length > 0 && (
+          <Pagination
+            showFirstButton
+            showLastButton
+            page={page}
+            size="large"
+            count={Math.ceil(total / itemsPerPage)}
+            onChange={handlePageChange}
+            color="primary"
+            className={clsx(mt1, mb1)}
+            variant="outlined"
+          />
+        )}
 
         <GridList cellHeight="auto" className={gridList}>
           {books.map((book) => {
             const { id } = book;
-            return <BookListItem key={id} book={book} onDelete={handleDeleteLibrary} />;
+            return (
+              <BookListItem
+                key={id}
+                libraryId={libraryId}
+                book={book}
+                onDelete={handleDeleteLibrary}
+              />
+            );
           })}
         </GridList>
-        <Pagination
-          showFirstButton
-          showLastButton
-          page={page}
-          size="large"
-          count={Math.ceil(total / itemsPerPage)}
-          onChange={handlePageChange}
-          color="primary"
-          className={clsx(mt1, mb1)}
-          variant="outlined"
-        />
+        {books.length > 0 && (
+          <Pagination
+            showFirstButton
+            showLastButton
+            page={page}
+            size="large"
+            count={Math.ceil(total / itemsPerPage)}
+            onChange={handlePageChange}
+            color="primary"
+            className={clsx(mt1, mb1)}
+            variant="outlined"
+          />
+        )}
       </div>
     </>
   );
