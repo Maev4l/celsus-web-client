@@ -1,7 +1,10 @@
 import React, { useRef, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardMedia, CardActionArea } from '@material-ui/core';
+import { Card, CardMedia, CardActionArea, Tooltip } from '@material-ui/core';
+import { AddAPhoto } from '@material-ui/icons';
+
+import useGlobalStyles from '../styles';
 
 const shapes = {
   'rectangular-large': {
@@ -49,6 +52,7 @@ const ImageUploader = ({ shape, size, border, onContentChanged }) => {
   const { root, input, img } = useStyles({ border });
   const inputRef = useRef(null);
   const [image, setImage] = useState();
+  const { flex, flexContentCenter, flexCenter, flexColumn, mb1 } = useGlobalStyles();
 
   const handleFileChange = (e) => {
     const {
@@ -79,7 +83,16 @@ const ImageUploader = ({ shape, size, border, onContentChanged }) => {
       <input className={clsx(input)} ref={inputRef} type="file" onChange={handleFileChange} />
       {/* eslint-disable */}
       <CardActionArea onClick={handleImageClick}>
-        <CardMedia className={clsx(img)} image={image} />
+        {image ? (
+          <CardMedia className={clsx(img)} image={image} />
+        ) : (
+          <Tooltip title="Add thumbnail">
+            <div className={clsx(flex, flexContentCenter, flexCenter, flexColumn, img)}>
+              <div className={clsx(mb1)}>Thumbnail</div>
+              <AddAPhoto fontSize="large" color="primary" />
+            </div>
+          </Tooltip>
+        )}
       </CardActionArea>
       {/* eslint-enable */}
     </Card>
