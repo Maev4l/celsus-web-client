@@ -3,12 +3,7 @@ import React from 'react';
 import BookEditor from './BookEditor';
 
 const EditBook = () => {
-  return (
-    <div>
-      Edit !!
-      <BookEditor />
-    </div>
-  );
+  return <BookEditor />;
 };
 
 export default EditBook;
