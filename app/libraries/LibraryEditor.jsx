@@ -51,11 +51,11 @@ const LibraryEditor = ({ saveLibrary, fetchData, onSaveSuccess }) => {
     <div className={clsx(flex, flexColumn)}>
       <Loading loading={loading} />
       <FormControl>
-        <InputLabel>Name</InputLabel>
+        <InputLabel shrink>Name</InputLabel>
         <Input value={name} onChange={handleChange('name')} />
       </FormControl>
       <FormControl className={clsx(mt2)}>
-        <InputLabel>Description</InputLabel>
+        <InputLabel shrink>Description</InputLabel>
         <Input multiline rows={5} value={description} onChange={handleChange('description')} />
       </FormControl>
       <div className={clsx(flex, flexContentEnd)}>
