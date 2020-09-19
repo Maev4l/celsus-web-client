@@ -11,9 +11,9 @@ import { DeleteForever } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-import { SimpleModal } from '../shared/ui';
-import useGlobalStyles from '../shared/styles';
-import { BookThumbnailPlaceHolder } from '../shared/assets';
+import SimpleModal from './SimpleModal';
+import useGlobalStyles from '../styles';
+import { BookThumbnailPlaceHolder } from '../assets';
 
 const useStyles = makeStyles({
   image: {
@@ -23,20 +23,29 @@ const useStyles = makeStyles({
   icon: {
     color: 'white',
   },
-  titleBar: {
+  titleBarBottom: {
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
+  titleBarTop: {
+    background:
+      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
 });
 
-const BookListItem = ({ libraryId, libraryName, book, onDelete }) => {
-  const { id, title, thumbnail } = book;
+const BookListItem = ({ book, onDelete, showLibraryName = false }) => {
+  const {
+    id,
+    title,
+    thumbnail,
+    library: { id: libraryId, name: libraryName },
+  } = book;
   const { m1 } = useGlobalStyles();
-  const { image, icon, titleBar } = useStyles();
+  const { image, icon, titleBarBottom, titleBarTop } = useStyles();
   const [showDeletionConfirmation, showDeletionPopup] = useState(false);
 
   const handleClickDelete = () => {
-    showDeletionPopup(!showDeletionConfirmation);
+    showDeletionPopup(true);
   };
 
   const handleCancelDelete = () => {
@@ -44,6 +53,7 @@ const BookListItem = ({ libraryId, libraryName, book, onDelete }) => {
   };
 
   const handleConfirmDelete = () => {
+    showDeletionPopup(false);
     onDelete(id);
   };
 
@@ -52,11 +62,11 @@ const BookListItem = ({ libraryId, libraryName, book, onDelete }) => {
   return (
     <>
       <GridListTile className={clsx(m1)}>
-        <Link to={{ pathname: `/libraries/${libraryId}/books/${id}`, state: { libraryName } }}>
+        <Link to={`/libraries/${libraryId}/books/${id}`}>
           <CardMedia className={clsx(image)} image={source} />
         </Link>
         <GridListTileBar
-          className={clsx(titleBar)}
+          className={clsx(titleBarBottom)}
           title={
             <Typography noWrap variant="subtitle2">
               {title}
@@ -68,6 +78,17 @@ const BookListItem = ({ libraryId, libraryName, book, onDelete }) => {
             </IconButton>
           }
         />
+        {showLibraryName && libraryName && (
+          <GridListTileBar
+            className={clsx(titleBarTop)}
+            titlePosition="top"
+            title={
+              <Typography noWrap variant="subtitle2">
+                {libraryName}
+              </Typography>
+            }
+          />
+        )}
       </GridListTile>
       <SimpleModal
         open={showDeletionConfirmation}

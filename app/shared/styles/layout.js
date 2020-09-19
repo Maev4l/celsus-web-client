@@ -3,7 +3,7 @@ const layout = () => ({
     height: '100%',
   },
   /**
-   * Floar
+   * Float
    */
   floatLeft: {
     float: 'left',

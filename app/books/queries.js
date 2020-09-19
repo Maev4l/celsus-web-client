@@ -1,19 +1,20 @@
 export const FetchLibraryBooks = `query FetchLibraryBooks ($id: ID!, $page:Int = 1, $pageSize: Int = 20) {
     library(id:$id, page:$page, pageSize:$pageSize) {
+        name, 
         content {
             books {
                 id,
                 title,
-                thumbnail
+                thumbnail,
+                library {
+                    id,
+                    name
+                }
             },
             total, 
             itemsPerPage
         }
     }
-}`;
-
-export const DeleteBook = `mutation DeleteBook($id: ID!) {
-    removeBook(id: $id)
 }`;
 
 export const FetchBook = `query FetchBook($id: ID!) {

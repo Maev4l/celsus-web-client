@@ -1,44 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Button, Typography } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
-import { useParams, useLocation, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Typography } from '@material-ui/core';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { NavHeaderActions } from '../shared/layout';
-import { Loading } from '../shared/ui';
-import { FetchLibraryBooks, DeleteBook } from './queries';
-import useGlobalStyles from '../shared/styles';
-import { graphql } from '../shared/api-client';
-import BookListItem from './BookListItem';
+import { BooksList } from '../shared/ui';
+import { FetchLibraryBooks } from './queries';
+import { DeleteBook } from '../shared/queries/queries';
 
-const useStyles = makeStyles({
-  container: {
-    overflow: 'hidden',
-  },
-  gridList: {
-    width: '100%',
-    height: '100%',
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-});
+import { graphql } from '../shared/api-client';
 
 const LibraryBooksList = () => {
   const { libraryId } = useParams();
-  const { flex, flexWrap, flexContentAround, mb1, mt1 } = useGlobalStyles();
-  const { container, gridList } = useStyles();
-  const [state, setState] = useState({
-    loading: false,
-    books: [],
-    total: 0,
-    itemsPerPage: 0,
-    page: 0,
-  });
-  const {
-    state: { libraryName },
-  } = useLocation();
+  const [libraryName, setLibraryName] = useState('');
 
   const history = useHistory();
 
@@ -47,32 +20,15 @@ const LibraryBooksList = () => {
   };
 
   const fetchData = async (page) => {
-    setState({ ...state, loading: true });
-    graphql(FetchLibraryBooks, { id: libraryId, page }).then(
-      ({
-        library: {
-          content: { books, total, itemsPerPage },
-        },
-      }) => {
-        setState({ ...state, books, total, itemsPerPage, loading: false, page });
-      },
-    );
+    const {
+      library: { content, name },
+    } = await graphql(FetchLibraryBooks, { id: libraryId, page });
+    setLibraryName(name);
+    return content;
   };
 
-  useEffect(() => {
-    fetchData(1);
-  }, []);
-
-  const { books, loading, page, total, itemsPerPage } = state;
-
-  const handleDeleteLibrary = (id) => {
-    graphql(DeleteBook, { id }).then(() => {
-      fetchData(page);
-    });
-  };
-
-  const handlePageChange = async (event, selectedPage) => {
-    await fetchData(selectedPage);
+  const handleDeleteBook = async (id) => {
+    await graphql(DeleteBook, { id });
   };
 
   return (
@@ -87,50 +43,10 @@ const LibraryBooksList = () => {
           Books in library <strong>{libraryName}</strong>
         </Typography>
       </div>
-      <div className={clsx(flex, flexWrap, flexContentAround, container)}>
-        <Loading loading={loading} />
-        {books.length > 0 && (
-          <Pagination
-            showFirstButton
-            showLastButton
-            page={page}
-            size="large"
-            count={Math.ceil(total / itemsPerPage)}
-            onChange={handlePageChange}
-            color="primary"
-            className={clsx(mt1, mb1)}
-            variant="outlined"
-          />
-        )}
-
-        <GridList cellHeight="auto" className={gridList}>
-          {books.map((book) => {
-            const { id } = book;
-            return (
-              <BookListItem
-                key={id}
-                libraryId={libraryId}
-                libraryName={libraryName}
-                book={book}
-                onDelete={handleDeleteLibrary}
-              />
-            );
-          })}
-        </GridList>
-        {books.length > 0 && (
-          <Pagination
-            showFirstButton
-            showLastButton
-            page={page}
-            size="large"
-            count={Math.ceil(total / itemsPerPage)}
-            onChange={handlePageChange}
-            color="primary"
-            className={clsx(mt1, mb1)}
-            variant="outlined"
-          />
-        )}
-      </div>
+      <BooksList
+        fetchData={(page) => fetchData(page)}
+        onDeleteBook={(id) => handleDeleteBook(id)}
+      />
     </>
   );
 };

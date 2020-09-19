@@ -23,7 +23,7 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
 
   useEffect(() => {
     setState({ ...state, loading: true });
-    fetchData().then(({ book }) => {
+    fetchData().then((book) => {
       setState({ ...state, loading: false, book });
     });
   }, []);
@@ -87,7 +87,13 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
       if (onSaveSuccess) {
         onSaveSuccess(data);
       }
-      history.push('/libraries');
+      const {
+        book: {
+          library: { id: libraryId },
+        },
+      } = state;
+
+      history.push(`/libraries/${libraryId}/books`);
     } catch (e) {
       setState({ ...state, loading: false });
       notify('error', e.message);

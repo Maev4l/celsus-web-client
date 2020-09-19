@@ -12,15 +12,15 @@ const EditBook = () => {
   const { notify } = useNotification();
 
   const fetchData = async () => {
-    // Flatten the data structure coming from the graphql response
     const { book } = await graphql(FetchBook, { id: bookId });
-    const { library, ...rest } = book;
-    const { id: libraryId } = library;
-    return { book: { ...rest, libraryId } };
+    return book;
   };
 
   const saveBook = async (data) => {
-    await graphql(UpdateBook, { book: data });
+    // Flatten the data structure coming from the original graphql fetch-book response
+    const { library, ...rest } = data;
+    const { id: libraryId } = library;
+    await graphql(UpdateBook, { book: { ...rest, libraryId } });
   };
 
   const onSaveSuccess = (data) => {

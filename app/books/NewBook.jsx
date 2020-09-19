@@ -11,26 +11,28 @@ const NewBook = () => {
   const {
     state: { libraryName },
   } = useLocation();
+
   const { notify } = useNotification();
 
   const fetchData = async () => ({
-    book: {
-      title: '',
-      description: '',
-      authors: [],
-      isbn10: '',
-      isbn13: '',
-      thumbnail: '',
-      tags: [],
-      bookSet: '',
-      bookSetOrder: 0,
-      language: 'fr',
-      libraryId,
+    title: '',
+    description: '',
+    authors: [],
+    isbn10: '',
+    isbn13: '',
+    thumbnail: '',
+    tags: [],
+    bookSet: '',
+    bookSetOrder: 0,
+    language: 'fr',
+    library: {
+      id: libraryId,
     },
   });
 
   const saveBook = async (data) => {
-    await graphql(AddBook, { book: data });
+    const { library, ...rest } = data;
+    await graphql(AddBook, { book: { ...rest, libraryId } });
   };
 
   const onSaveSuccess = async (data) => {

@@ -35,7 +35,7 @@ const LibraryListItem = ({ library, onDelete, onClick }) => {
   const history = useHistory();
 
   const handleClickBook = () => {
-    history.push({ pathname: `/libraries/${id}/books`, state: { libraryName: name } });
+    history.push(`/libraries/${id}/books`);
   };
 
   const handleClickDelete = () => {
