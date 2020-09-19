@@ -51,8 +51,10 @@ const LibraryEditor = ({ saveLibrary, fetchData, onSaveSuccess }) => {
     <div className={clsx(flex, flexColumn)}>
       <Loading loading={loading} />
       <FormControl>
-        <InputLabel shrink>Name</InputLabel>
-        <Input value={name} onChange={handleChange('name')} />
+        <InputLabel required shrink>
+          Name
+        </InputLabel>
+        <Input required value={name} onChange={handleChange('name')} />
       </FormControl>
       <FormControl className={clsx(mt2)}>
         <InputLabel shrink>Description</InputLabel>
@@ -60,6 +62,7 @@ const LibraryEditor = ({ saveLibrary, fetchData, onSaveSuccess }) => {
       </FormControl>
       <div className={clsx(flex, flexContentEnd)}>
         <Button
+          disabled={!name}
           color="primary"
           variant="outlined"
           onClick={() => handleSave(library)}

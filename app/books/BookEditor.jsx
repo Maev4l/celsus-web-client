@@ -120,6 +120,12 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
         />
       </FormControl>
       <FormControl className={clsx(mt2)}>
+        <InputLabel required shrink>
+          Book title
+        </InputLabel>
+        <Input required value={title} onChange={handleChange('title')} />
+      </FormControl>
+      <FormControl className={clsx(mt2)}>
         <InputLabel shrink>Language</InputLabel>
         <Select
           value={language || 'fr'}
@@ -135,10 +141,6 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
             );
           })}
         </Select>
-      </FormControl>
-      <FormControl className={clsx(mt2)}>
-        <InputLabel shrink>Book title</InputLabel>
-        <Input value={title} onChange={handleChange('title')} />
       </FormControl>
       <FormControl className={clsx(mt2)}>
         <InputLabel shrink>Bookset name</InputLabel>
@@ -168,7 +170,13 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
         <Input value={isbn10} onChange={handleChange('isbn10')} />
       </FormControl>
       <div className={clsx(flex, flexContentEnd)}>
-        <Button color="primary" variant="outlined" onClick={() => handleSave(book)} className={mt2}>
+        <Button
+          disabled={!title}
+          color="primary"
+          variant="outlined"
+          onClick={() => handleSave(book)}
+          className={mt2}
+        >
           Save
         </Button>
       </div>
