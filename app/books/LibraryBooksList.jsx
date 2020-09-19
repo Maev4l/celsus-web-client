@@ -43,7 +43,7 @@ const LibraryBooksList = () => {
   const history = useHistory();
 
   const handleAddBook = () => {
-    history.push(`/libraries/${libraryId}/books/new`);
+    history.push({ pathname: `/libraries/${libraryId}/books/new`, state: { libraryName } });
   };
 
   const fetchData = async (page) => {
@@ -110,6 +110,7 @@ const LibraryBooksList = () => {
               <BookListItem
                 key={id}
                 libraryId={libraryId}
+                libraryName={libraryName}
                 book={book}
                 onDelete={handleDeleteLibrary}
               />

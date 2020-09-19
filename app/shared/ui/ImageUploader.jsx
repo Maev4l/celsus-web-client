@@ -34,7 +34,7 @@ const shapes = {
   },
 };
 
-const ImageUploader = ({ shape, size, border, onContentChanged }) => {
+const ImageUploader = ({ shape, size, border, source, onContentChanged }) => {
   const useStyles = makeStyles({
     root: { margin: 0, ...shapes[`${shape}-${size}`] },
     input: {
@@ -64,7 +64,7 @@ const ImageUploader = ({ shape, size, border, onContentChanged }) => {
       const reader = new FileReader();
       reader.onload = (evn) => {
         const encodedImage = Buffer.from(evn.target.result).toString('base64');
-        setImage(`data:image/png;base64,${encodedImage}`);
+        setImage(encodedImage);
 
         if (onContentChanged) {
           onContentChanged(encodedImage);
@@ -78,13 +78,15 @@ const ImageUploader = ({ shape, size, border, onContentChanged }) => {
     inputRef.current.click();
   };
 
+  const thumbnail = image || source;
+
   return (
     <Card className={clsx(root)}>
       <input className={clsx(input)} ref={inputRef} type="file" onChange={handleFileChange} />
       {/* eslint-disable */}
       <CardActionArea onClick={handleImageClick}>
-        {image ? (
-          <CardMedia className={clsx(img)} image={image} />
+        {thumbnail ? (
+          <CardMedia className={clsx(img)} image={`data:image/png;base64,${thumbnail}`} />
         ) : (
           <Tooltip title="Add thumbnail">
             <div className={clsx(flex, flexContentCenter, flexCenter, flexColumn, img)}>

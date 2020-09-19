@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BookListItem = ({ libraryId, book, onDelete }) => {
+const BookListItem = ({ libraryId, libraryName, book, onDelete }) => {
   const { id, title, thumbnail } = book;
   const { m1 } = useGlobalStyles();
   const { image, icon, titleBar } = useStyles();
@@ -52,7 +52,7 @@ const BookListItem = ({ libraryId, book, onDelete }) => {
   return (
     <>
       <GridListTile className={clsx(m1)}>
-        <Link to={`/libraries/${libraryId}/books/${id}`}>
+        <Link to={{ pathname: `/libraries/${libraryId}/books/${id}`, state: { libraryName } }}>
           <CardMedia className={clsx(image)} image={source} />
         </Link>
         <GridListTileBar
