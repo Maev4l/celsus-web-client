@@ -14,6 +14,8 @@ import {
 import { ImageUploader, Loading, useBookLanguages } from '../shared/ui';
 import useGlobalStyles from '../shared/styles';
 import { useNotification } from '../shared/notifications';
+import { graphql } from '../shared/api-client';
+import { ResizeImage } from '../shared/queries/queries';
 
 const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
   const [state, setState] = useState({ loading: false, book: {} });
@@ -67,8 +69,12 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
 
   const handleThumbnailChange = (value) => {
     const { book: changedBook } = state;
-    changedBook.thumbnail = value;
-    setState({ ...state, book: changedBook });
+    graphql(ResizeImage, { image: { width: 160, height: 240, image: value } }).then(
+      ({ resizeImage }) => {
+        changedBook.thumbnail = resizeImage;
+        setState({ ...state, book: changedBook });
+      },
+    );
   };
 
   const handleLanguageChange = (e) => {
