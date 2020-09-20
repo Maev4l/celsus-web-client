@@ -8,7 +8,8 @@
     "build:dev": "yarn download-infra:dev && webpack --config ./build/webpack.config.dev.babel.js --progress --colors",
     "build:ci": "BUILD_MODE=CI webpack --config ./build/webpack.config.prod.babel.js --progress --colors",
     "start:dev": "yarn download-infra:dev && webpack-dev-server --config ./build/webpack.config.dev.babel.js --progress --colors",
-    "lint": "eslint app/**/*.jsx app/**/*.js build/*.js --no-error-on-unmatched-pattern"
+    "lint": "eslint app/**/*.jsx app/**/*.js build/*.js --no-error-on-unmatched-pattern",
+    "deploy:dev": "yarn build && node deploy"
   },
   "devDependencies": {
     "@babel/core": "7.11.5",
@@ -40,6 +41,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "3.0.0",
     "css-loader": "^4.2.2",
+    "deploy-aws-s3-cloudfront": "3.2.4",
     "eslint": "7.8.1",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "6.11.0",
