@@ -41,8 +41,9 @@ const BookListItem = ({ book, onDelete, showLibraryName = false }) => {
     thumbnail,
     library: { id: libraryId, name: libraryName },
   } = book;
-  const { m1 } = useGlobalStyles();
-  const { image, icon, titleBarBottom, titleBarTop } = useStyles();
+  const { m1, silentLinkUnderline } = useGlobalStyles();
+  const { image, icon, titleBarBottom } = useStyles();
+
   const [showDeletionConfirmation, showDeletionPopup] = useState(false);
 
   const handleClickDelete = () => {
@@ -75,23 +76,20 @@ const BookListItem = ({ book, onDelete, showLibraryName = false }) => {
               {title}
             </Typography>
           }
+          subtitle={
+            showLibraryName &&
+            libraryName && (
+              <Link to={`/libraries/${libraryId}/books`} className={silentLinkUnderline}>
+                {libraryName}
+              </Link>
+            )
+          }
           actionIcon={
             <IconButton className={icon} onClick={handleClickDelete}>
               <DeleteForever />
             </IconButton>
           }
         />
-        {showLibraryName && libraryName && (
-          <GridListTileBar
-            className={clsx(titleBarTop)}
-            titlePosition="top"
-            title={
-              <Typography noWrap variant="subtitle2">
-                {libraryName}
-              </Typography>
-            }
-          />
-        )}
       </GridListTile>
 
       <SimpleModal
