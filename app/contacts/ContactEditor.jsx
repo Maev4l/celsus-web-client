@@ -23,7 +23,7 @@ const ContactEditor = ({ saveContact, fetchData, onSaveSuccess }) => {
 
   const handleThumbnailChange = (value) => {
     const { contact: changedContact } = state;
-    graphql(ResizeImage, { image: { width: 160, height: 240, image: value } }).then(
+    graphql(ResizeImage, { image: { width: 160, height: 160, image: value } }).then(
       ({ resizeImage }) => {
         changedContact.thumbnail = resizeImage;
         setState({ ...state, contact: changedContact });
