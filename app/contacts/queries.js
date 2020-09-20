@@ -21,3 +21,7 @@ export const FetchContact = `query FetchContact($id: ID!) {
 export const UpdateContact = `mutation UpdateContact($contact: ContactInput!) {
     updateContact(contact: $contact) 
 }`;
+
+export const DeleteContact = `mutation DeleteContact($id:ID!) {
+    removeContact(id:$id)
+}`;

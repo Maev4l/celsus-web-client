@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Grid, Button } from '@material-ui/core';
 
 import { graphql } from '../shared/api-client';
-import { ListContacts } from './queries';
+import { ListContacts, DeleteContact } from './queries';
 import useGlobalStyles from '../shared/styles';
 import ContactListItem from './ContactListItem';
 import { Loading } from '../shared/ui';
@@ -30,6 +30,12 @@ const ContactsList = () => {
     history.push('/contacts/new');
   };
 
+  const handleDeleteContact = (id) => {
+    graphql(DeleteContact, { id }).then(() => {
+      fetchData();
+    });
+  };
+
   const { contacts, loading } = state;
   return (
     <div className={clsx(flex, flexGrow)}>
@@ -44,7 +50,7 @@ const ContactsList = () => {
           const { id } = contact;
           return (
             <Grid item key={id}>
-              <ContactListItem key={id} contact={contact} />
+              <ContactListItem key={id} contact={contact} onDelete={handleDeleteContact} />
             </Grid>
           );
         })}

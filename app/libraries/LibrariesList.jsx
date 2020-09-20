@@ -30,10 +30,6 @@ const LibrariesList = () => {
     history.push('/libraries/new');
   };
 
-  const handleEditLibrary = (id) => {
-    history.push(`/libraries/${id}`);
-  };
-
   const handleDeleteLibrary = (id) => {
     graphql(DeleteLibrary, { id }).then(() => {
       fetchData();
@@ -55,12 +51,7 @@ const LibrariesList = () => {
           const { id } = library;
           return (
             <Grid item key={id}>
-              <LibraryListItem
-                key={id}
-                library={library}
-                onDelete={handleDeleteLibrary}
-                onClick={() => handleEditLibrary(id)}
-              />
+              <LibraryListItem key={id} library={library} onDelete={handleDeleteLibrary} />
             </Grid>
           );
         })}

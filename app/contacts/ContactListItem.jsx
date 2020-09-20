@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 
 import { ContactAvatarPlaceHolder } from '../shared/assets';
 import useGlobalStyles from '../shared/styles';
+import { SimpleModal } from '../shared/ui';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -28,19 +29,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContactListItem = ({ contact }) => {
+const ContactListItem = ({ contact, onDelete }) => {
   const { card, avatar } = useStyles();
   const { flex, m1, flexContentEnd } = useGlobalStyles();
   const history = useHistory();
-
-  const { nickname, id, thumbnail } = contact;
-
-  const handleClickDelete = () => {};
+  const [showDeletionConfirmation, showDeletionPopup] = useState(false);
 
   const onClick = () => {
+    const { id } = contact;
     history.push(`/contacts/${id}`);
   };
 
+  const handleClickDelete = () => {
+    showDeletionPopup(!showDeletionConfirmation);
+  };
+
+  const handleCancelDelete = () => {
+    showDeletionPopup(false);
+  };
+
+  const handleConfirmDelete = () => {
+    const { id } = contact;
+    onDelete(id);
+  };
+  const { nickname, thumbnail } = contact;
   const source = thumbnail ? `data:image/png;base64,${thumbnail}` : ContactAvatarPlaceHolder;
   return (
     <>
@@ -57,6 +69,13 @@ const ContactListItem = ({ contact }) => {
           </IconButton>
         </CardActions>
       </Card>
+      <SimpleModal
+        open={showDeletionConfirmation}
+        header="Deletion Confirmation"
+        message={`Delete '${nickname}' ?`}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+      />
     </>
   );
 };

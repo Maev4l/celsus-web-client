@@ -25,8 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LibraryListItem = ({ library, onDelete, onClick }) => {
-  const { id, name, description, booksCount } = library;
+const LibraryListItem = ({ library, onDelete }) => {
   const { pt2, pr2, pl2, flexContentBetween } = useGlobalStyles();
   const { card } = useStyles();
 
@@ -35,7 +34,13 @@ const LibraryListItem = ({ library, onDelete, onClick }) => {
   const history = useHistory();
 
   const handleClickBook = () => {
+    const { id } = library;
     history.push(`/libraries/${id}/books`);
+  };
+
+  const handleEditLibrary = () => {
+    const { id } = library;
+    history.push(`/libraries/${id}`);
   };
 
   const handleClickDelete = () => {
@@ -47,13 +52,16 @@ const LibraryListItem = ({ library, onDelete, onClick }) => {
   };
 
   const handleConfirmDelete = () => {
+    const { id } = library;
     onDelete(id);
   };
+
+  const { name, description, booksCount } = library;
 
   return (
     <div>
       <Card className={clsx(pt2, pr2, pl2, card)} variant="outlined">
-        <CardActionArea onClick={onClick}>
+        <CardActionArea onClick={handleEditLibrary}>
           <CardHeader title={name} />
           <CardContent>{description}</CardContent>
         </CardActionArea>
