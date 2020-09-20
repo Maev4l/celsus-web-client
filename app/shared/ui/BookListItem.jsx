@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   CardMedia,
+  Tooltip,
 } from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -62,9 +63,11 @@ const BookListItem = ({ book, onDelete, showLibraryName = false }) => {
   return (
     <>
       <GridListTile className={clsx(m1)}>
-        <Link to={`/libraries/${libraryId}/books/${id}`}>
-          <CardMedia className={clsx(image)} image={source} />
-        </Link>
+        <Tooltip title={title} placement="top-start" arrow>
+          <Link to={`/libraries/${libraryId}/books/${id}`}>
+            <CardMedia className={clsx(image)} image={source} />
+          </Link>
+        </Tooltip>
         <GridListTileBar
           className={clsx(titleBarBottom)}
           title={
@@ -90,6 +93,7 @@ const BookListItem = ({ book, onDelete, showLibraryName = false }) => {
           />
         )}
       </GridListTile>
+
       <SimpleModal
         open={showDeletionConfirmation}
         header="Deletion Confirmation"
