@@ -31,11 +31,12 @@ const ContactListItem = ({ contact }) => {
   const { card, avatar } = useStyles();
   const { flex, m1, flexContentEnd } = useGlobalStyles();
 
+  const { nickname, id, thumbnail } = contact;
+
   const handleClickDelete = () => {};
 
   const onClick = () => {};
 
-  const { nickname, id, thumbnail } = contact;
   const source = thumbnail ? `data:image/png;base64,${thumbnail}` : ContactAvatarPlaceHolder;
   return (
     <>

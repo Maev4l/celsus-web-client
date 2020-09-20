@@ -19,6 +19,21 @@ const shapes = {
     width: 40,
     height: 60,
   },
+  'circle-large': {
+    width: 132,
+    height: 132,
+    borderRadius: '50%',
+  },
+  'circle-medium': {
+    width: 64,
+    height: 64,
+    borderRadius: '50%',
+  },
+  'circle-small': {
+    width: 32,
+    height: 32,
+    borderRadius: '50%',
+  },
 
   'square-large': {
     width: 132,

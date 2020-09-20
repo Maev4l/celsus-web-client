@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-
+import { useHistory } from 'react-router-dom';
 import { Grid, Button } from '@material-ui/core';
 
 import { graphql } from '../shared/api-client';
@@ -12,7 +12,7 @@ import { NavHeaderActions } from '../shared/layout';
 
 const ContactsList = () => {
   const [state, setState] = useState({ loading: false, contacts: [] });
-
+  const history = useHistory();
   const { flex, flexGrow } = useGlobalStyles();
 
   const fetchData = async () => {
@@ -26,7 +26,9 @@ const ContactsList = () => {
     fetchData();
   }, []);
 
-  const handleAddContact = () => {};
+  const handleAddContact = () => {
+    history.push('/contacts/new');
+  };
 
   const { contacts, loading } = state;
   return (

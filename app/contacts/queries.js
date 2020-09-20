@@ -5,3 +5,9 @@ export const ListContacts = `query ListContacts {
         thumbnail
     } 
 }`;
+
+export const AddContact = `mutation AddContact($contact: ContactInput!){
+    addContact(contact: $contact) {
+        id
+    }
+}`;
