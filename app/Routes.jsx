@@ -7,6 +7,7 @@ import { Layout } from './shared/layout';
 
 const Home = lazy(() => import('./home/Home'));
 const Libraries = lazy(() => import('./libraries/Libraries'));
+const Contacts = lazy(() => import('./contacts/Contacts'));
 
 const Routes = () => {
   return (
@@ -20,6 +21,11 @@ const Routes = () => {
         <AuthenticatedRoute path="/libraries">
           <Layout>
             <Libraries />
+          </Layout>
+        </AuthenticatedRoute>
+        <AuthenticatedRoute path="/contacts">
+          <Layout>
+            <Contacts />
           </Layout>
         </AuthenticatedRoute>
         <Route exact path="/sign-in">

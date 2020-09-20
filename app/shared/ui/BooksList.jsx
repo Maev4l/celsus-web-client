@@ -16,9 +16,6 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100%',
   },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
 });
 
 const BooksList = ({ fetchData, onDeleteBook, showLibraryName = false, refetch = false }) => {
