@@ -11,3 +11,13 @@ export const AddContact = `mutation AddContact($contact: ContactInput!){
         id
     }
 }`;
+
+export const FetchContact = `query FetchContact($id: ID!) { 
+    contact(id:$id) {
+        id, nickname, thumbnail
+    } 
+}`;
+
+export const UpdateContact = `mutation UpdateContact($contact: ContactInput!) {
+    updateContact(contact: $contact) 
+}`;

@@ -10,6 +10,7 @@ import {
   CardActionArea,
 } from '@material-ui/core';
 import { DeleteForever } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 import { ContactAvatarPlaceHolder } from '../shared/assets';
 import useGlobalStyles from '../shared/styles';
@@ -30,12 +31,15 @@ const useStyles = makeStyles((theme) => ({
 const ContactListItem = ({ contact }) => {
   const { card, avatar } = useStyles();
   const { flex, m1, flexContentEnd } = useGlobalStyles();
+  const history = useHistory();
 
   const { nickname, id, thumbnail } = contact;
 
   const handleClickDelete = () => {};
 
-  const onClick = () => {};
+  const onClick = () => {
+    history.push(`/contacts/${id}`);
+  };
 
   const source = thumbnail ? `data:image/png;base64,${thumbnail}` : ContactAvatarPlaceHolder;
   return (
