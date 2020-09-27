@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Amplify from '@aws-amplify/core';
+import Auth from '@aws-amplify/auth';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
@@ -22,6 +23,10 @@ Amplify.configure({
   },
   API: {
     graphql_endpoint: 'https://api-celsus.isnan.eu/graphql',
+    graphql_headers: async () => {
+      const currentSession = await Auth.currentSession();
+      return { Authorization: currentSession.getIdToken().getJwtToken() };
+    },
   },
 });
 
