@@ -46,7 +46,7 @@ const SearchPanel = () => {
   const handleKeyPress = async ({ key }) => {
     const { query } = state;
     if (key === 'Enter' && query) {
-      onSubmitQuery(query.split(' '));
+      onSubmitQuery();
     }
   };
 
