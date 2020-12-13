@@ -42,6 +42,19 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
     setState({ ...state, book: changedBook });
   };
 
+  const handleBookSetOrderChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    const { book: changedBook } = state;
+    let setOrder = parseInt(value, 10);
+    if (Number.isNaN(setOrder)) {
+        setOrder = changedBook.bookSet ? 1 : 0
+    }
+    changedBook.bookSetOrder = setOrder;
+    setState({ ...state, book: changedBook });
+  }
+
   const handleAuthorsChange = (e) => {
     const {
       target: { value },
@@ -160,7 +173,7 @@ const BookEditor = ({ saveBook, fetchData, onSaveSuccess }) => {
       </FormControl>
       <FormControl className={clsx(mt2)}>
         <InputLabel shrink>Bookset order</InputLabel>
-        <Input value={bookSetOrder} onChange={handleChange('bookSetOrder')} disabled={!bookSet} />
+        <Input value={bookSetOrder} onChange={handleBookSetOrderChange} disabled={!bookSet} />
       </FormControl>
       <FormControl className={clsx(mt2)}>
         <InputLabel shrink>Authors</InputLabel>
