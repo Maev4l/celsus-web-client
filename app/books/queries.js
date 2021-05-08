@@ -1,7 +1,7 @@
 export const FetchLibraryBooks = `query FetchLibraryBooks ($id: ID!, $page:Int = 1, $pageSize: Int = 20) {
     library(id:$id, page:$page, pageSize:$pageSize) {
         name, 
-        content {
+        books {
             books {
                 id,
                 title,

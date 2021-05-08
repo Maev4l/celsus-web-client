@@ -21,10 +21,10 @@ const LibraryBooksList = () => {
 
   const fetchData = async (page) => {
     const {
-      library: { content, name },
+      library: { books, name },
     } = await graphql(FetchLibraryBooks, { id: libraryId, page });
     setLibraryName(name);
-    return content;
+    return books;
   };
 
   const handleDeleteBook = async (id) => {
