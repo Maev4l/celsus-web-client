@@ -6,7 +6,7 @@
     "download-infra:dev": "aws s3 cp s3://global-tf-states/celsus/dev/infra.json infra.json",
     "build": "yarn download-infra:dev && webpack --config ./build/webpack.config.prod.babel.js --progress --colors",
     "build:dev": "yarn download-infra:dev && webpack --config ./build/webpack.config.dev.babel.js --progress --colors",
-    "build:ci": "BUILD_MODE=CI webpack --config ./build/webpack.config.prod.babel.js --progress --colors",
+    "build:ci": "BUILD_MODE=CI webpack --config ./build/webpack.config.prod.babel.js --colors",
     "start:dev": "yarn download-infra:dev && webpack-dev-server --config ./build/webpack.config.dev.babel.js --progress --colors",
     "lint": "eslint app/**/*.jsx app/**/*.js build/*.js --no-error-on-unmatched-pattern",
     "deploy:dev": "yarn build && node deploy"
