@@ -1,7 +1,7 @@
 pipeline { 
     agent {
         docker { 
-            image 'node:14-alpine' 
+            image '671123374425.dkr.ecr.eu-central-1.amazonaws.com/jenkins/nodejs:14' 
         } 
     }
     options { 
