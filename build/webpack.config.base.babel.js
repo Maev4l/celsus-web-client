@@ -3,10 +3,13 @@ import webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import fs from 'fs';
 
-/* eslint-disable */
-const infra = process.env.BUILD_MODE === 'CI' ? {} : require('../infra.json');
-/* eslint-enable */
+const loadConfigFile = () => {
+  return fs.readFileSync(path.resolve(__dirname, '..', './infra.json'));
+};
+
+const infra = process.env.BUILD_MODE === 'CI' ? {} : loadConfigFile();
 
 export default {
   entry: {
